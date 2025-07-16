@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background: 220 12% 8%;
+            --foreground: 0 0% 95%;
+            --card: 220 12% 8%;
+            --card-foreground: 0 0% 95%;
+            --popover: 220 12% 8%;
+            --popover-foreground: 0 0% 95%;
+            --primary: 0 0% 95%;
+            --primary-foreground: 220 12% 8%;
+            --secondary: 220 8% 15%;
+            --secondary-foreground: 0 0% 85%;
+            --muted: 220 8% 15%;
+            --muted-foreground: 0 0% 65%;
+            --accent: 220 8% 15%;
+            --accent-foreground: 0 0% 85%;
+            --destructive: 0 84.2% 60.2%;
+            --destructive-foreground: 210 40% 98%;
+            --border: 220 8% 20%;
+            --input: 220 8% 20%;
+            --ring: 0 0% 95%;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background: hsl(var(--background));
+            color: hsl(var(--foreground));
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .fade-in {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .fade-in-delay {
+            animation: fadeIn 2.5s ease-in-out;
+        }
+
+        .fade-in-slow {
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .handwritten {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .serif {
+            font-family: 'Crimson Text', serif;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% {
+                transform: translate3d(0,0,0);
+            }
+            40%, 43% {
+                transform: translate3d(0, -30px, 0);
+            }
+            70% {
+                transform: translate3d(0, -15px, 0);
+            }
+            90% {
+                transform: translate3d(0, -4px, 0);
+            }
+        }
+
+        .animate-bounce {
+            animation: bounce 1s infinite;
+        }
+
+        /* Custom button styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 1.125rem;
+            font-family: 'Crimson Text', serif;
+            background: transparent;
+            color: hsla(var(--foreground), 0.7);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 0.375rem;
+        }
+
+        .btn:hover {
+            color: hsl(var(--foreground));
+            background: hsla(var(--secondary), 0.5);
+        }
+
+        .chevron-down {
+            width: 1.25rem;
+            height: 1.25rem;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // ChevronDown icon component
+        const ChevronDown = () => (
+            <svg className="chevron-down animate-bounce" viewBox="0 0 24 24">
+                <polyline points="6,9 12,15 18,9"></polyline>
+            </svg>
+        );
+
+        // PageOne component
+        const PageOne = ({ onContinue }) => {
+            return (
+                <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12" style={{background: 'hsl(var(--background))'}}>
+                    <div className="max-w-2xl w-full text-center space-y-8">
+                        <div className="fade-in">
+                            <h1 className="handwritten text-4xl md:text-5xl mb-8 font-medium" style={{color: 'hsl(var(--foreground))'}}>
+                                Happy birthday.
+                            </h1>
+                        </div>
+                        
+                        <div className="fade-in-delay serif text-lg md:text-xl leading-relaxed space-y-6" style={{color: 'hsla(var(--foreground), 0.9)'}}>
+                            <p>
+                                It hurts more than I can explain to write this, knowing I'm not the person you want beside you today. But still… I hope you smile. I hope this year brings you closer to everything you dream of (even if you don't know exactly what it is).
+                            </p>
+                            
+                            <p>
+                                I hope your day is full of the kind of love you've always deserved.
+                            </p>
+                            
+                            <p>
+                                Just want you to know that I'm proud of you — never forget how far you can go.
+                            </p>
+                            
+                            <p>
+                                You're the cutest, most pure and amazing person I've ever known, so please enjoy your day and make every second count.
+                            </p>
+                        </div>
+                        
+                        <div className="fade-in-slow pt-12">
+                            <button onClick={onContinue} className="btn">
+                                Continue
+                                <ChevronDown />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // PageTwo component
+        const PageTwo = () => {
+            return (
+                <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12" style={{background: 'hsl(var(--background))'}}>
+                    <div className="max-w-2xl w-full text-center space-y-12">
+                        <div className="fade-in">
+                            <p className="serif text-lg md:text-xl italic mb-16" style={{color: 'hsla(var(--foreground), 0.9)'}}>
+                                I still carry pieces of us…
+                            </p>
+                        </div>
+                        
+                        <div className="space-y-10 fade-in-delay">
+                            <div className="serif text-base md:text-lg leading-relaxed" style={{color: 'hsla(var(--foreground), 0.8)'}}>
+                                <p className="mb-8">
+                                    the movie suggestions you didn't like (I promise to watch all your suggestions, including Mouse),
+                                </p>
+                                
+                                <p className="mb-8">
+                                    our failed mission to find Anon (where everything started),
+                                </p>
+                                
+                                <p className="mb-8">
+                                    our childhood pictures,
+                                </p>
+                                
+                                <p className="mb-8">
+                                    the songs we shared,
+                                </p>
+                                
+                                <p className="mb-8">
+                                    how we said good morning with the weirdest stickers ever.
+                                </p>
+                                
+                                <p className="mb-8">
+                                    My apology flower.
+                                </p>
+                                
+                                <p className="mb-8">
+                                    first time we went out together — June 12th at 8:26 AM.<br />
+                                    Something about that moment stuck with me. I couldn't sleep that night…because I was just… genuinely happy And honestly, I hadn't felt that kind of joy in a long time.
+                                </p>
+                                
+                                <p className="mb-8">
+                                    Sending voice notes, singing in the weirdest and most random ways…
+                                </p>
+                                
+                                <p className="mb-8">
+                                    your morning snaps in the locker mirror — which was the best way ever to start my day with a smile —
+                                </p>
+                                
+                                <p className="mb-12">
+                                    and the random videos on Thursday nights, which were how I ended each week with a different kind of smile.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div className="fade-in-slow space-y-8">
+                            <p className="serif text-lg md:text-xl leading-relaxed" style={{color: 'hsla(var(--foreground), 0.9)'}}>
+                                I remember how we stayed up till dawn, laughing like nothing else mattered.<br />
+                                It did matter. At least to me.
+                            </p>
+                            
+                            <p className="serif text-base md:text-lg leading-relaxed italic" style={{color: 'hsla(var(--foreground), 0.8)'}}>
+                                You may not feel the same, and maybe I don't belong in your story anymore, but I'll always be silently wishing you the kind of happiness you once gave me — even if from far away.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Main App component
+        const App = () => {
+            const [currentPage, setCurrentPage] = useState(1);
+
+            const handleContinue = () => {
+                setCurrentPage(2);
+            };
+
+            return (
+                <div className="min-h-screen" style={{background: 'hsl(var(--background))'}}>
+                    {currentPage === 1 ? (
+                        <PageOne onContinue={handleContinue} />
+                    ) : (
+                        <PageTwo />
+                    )}
+                </div>
+            );
+        };
+
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
